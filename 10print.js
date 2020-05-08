@@ -35,11 +35,11 @@ function getIntensity() {
 }
 
 // format lines
-function drawLine(num) {
+function drawLine(num, rightNum) {
   let output = ''
   for (let i = 0; i < w; i++) {
     output += '\x1b[40m' // background to black
-    if (i < (halfW - 1 - num) || i > (halfW + 1 + num) 
+    if (i < (halfW - 1 - num) || i > (halfW + rightNum) 
         || i == (halfW + 1) || i == (halfW - 1)) {
       output += ' '
     }
@@ -61,14 +61,26 @@ function drawLine(num) {
 
 // create a triangle-like figure
 function drawTriangles() {
-  const i = Math.floor(Math.random() * Math.floor(w/5))
-  for (let j = 1; j <= i ; j += 2){
-    drawLine(j)
+  const layers = (Math.floor(Math.random() * Math.floor(w/5)) + 4)
+  let output = ''
+  let subCount = 1
+  for (let length = 1; length <= layers ; length += 2){ // layer in triangle
+    // set subCount for right side triangles
+    if (length > Math.floor(layers/3) 
+        && length <= layers - Math.floor(layers/5)) {
+      subCount += 2
+    }
+    else {
+      subCount = 1
+    }
+    // draw each line
+    drawLine(length, subCount)
   }
-  drawLine(0)
+  // spaces between triangles
+  drawLine(0, 0)
   let j = Math.floor(Math.random() * Math.floor(6))
   for (j; j > 0; j--){
-    drawLine(0)
+    drawLine(0, 0)
   }
 }
 
