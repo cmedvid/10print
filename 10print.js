@@ -7,10 +7,21 @@
 const w = process.stdout.columns
 const halfW = Math.floor(w/2)
 const characters = ['┼', '├', '┬', '┤', '┴']
+const color = ['\x1b[32m', '\x1b[33m']
 
 // random character generator for triangle fill
 function getChar() {
   return characters[Math.floor(Math.random() * Math.floor(5))]
+}
+
+// random color generator for triangle fill
+function getColor() {
+  if (Math.random() > 0.2) {
+    return color[0]
+  }
+  else {
+    return color[1]
+  }
 }
 
 // format lines
@@ -22,23 +33,26 @@ function drawLine(num) {
       output += ' '
     }
     else if (i == halfW) {
-      output += '╳' // play around some to find a divider u like
+      output += '\x1b[30m'
+      output += '│' // play around some to find a divider u like
     }
     else {
+      output += getColor()
       output += getChar()
     }
   }
+  // output += '\x1b[40m'
   console.log(output)
 }
 
 // create a triangle-like figure
 function drawTriangles() {
-  let i = Math.floor(Math.random() * Math.floor(w/5))
-  for (i; i > .5; i = Math.floor(i/1.5)){
-    drawLine(i)
+  const i = Math.floor(Math.random() * Math.floor(w/5))
+  for (let j = 1; j <= i ; j += 2){
+    drawLine(j)
   }
   drawLine(0)
-  let j = Math.floor(Math.random() * Math.floor(2))
+  let j = Math.floor(Math.random() * Math.floor(6))
   for (j; j > 0; j--){
     drawLine(0)
   }
