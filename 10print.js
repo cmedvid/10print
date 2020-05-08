@@ -45,8 +45,13 @@ function drawLine(num, rightNum) {
     }
     else if (i == halfW) {
       output += '\x1b[37m\x1b[2m' // white
-      output += '│' // play around some to find a divider u like
-      output += '\x1b[0m' // reset color settings
+      if (rightNum > 1){
+        output += '║' // play around some to find a divider u like
+      }
+      else {
+        output += '│' // play around some to find a divider u like
+      }
+      output += '\x1b[0m' // reset color settings 
     }
     else {
       output += getIntensity()
@@ -77,8 +82,7 @@ function drawTriangles() {
     drawLine(length, subCount)
   }
   // spaces between triangles
-  drawLine(0, 0)
-  let j = Math.floor(Math.random() * Math.floor(6))
+  let j = 2+ Math.floor(Math.random() * Math.floor(4))
   for (j; j > 0; j--){
     drawLine(0, 0)
   }
