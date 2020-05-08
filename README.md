@@ -9,6 +9,6 @@ This repo contains a JavaScript implementation of the classic Commodore 64 10 pr
 
 Developed Project:
 
-[![trianglepic] (https://github.com/cmedvid/images/blob/master/trianglepic.png)
+[![trianglepic](https://github.com/cmedvid/images/blob/master/trianglepic.png)
 
 randomized colors and sizes for generated triangles
